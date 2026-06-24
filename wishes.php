@@ -26,7 +26,7 @@
             </div>
             <div class="relative z-10 text-center glass-panel p-10 rounded-xl border border-white/40 max-w-2xl">
                 <span class="font-label-caps text-secondary mb-4 block tracking-widest">A SPECIAL MILESTONE</span>
-                <h1 class="font-display-md text-primary mb-6 leading-tight" style="font-family: 'Playfair Display'; font-size: 48px;">Happy Birthday, <span class="italic">Amara</span>.</h1>
+                <h1 class="font-display-md text-primary mb-6 leading-tight" style="font-family: 'Playfair Display'; font-size: 48px;">Happy Birthday, <span class="italic">Devita</span>.</h1>
             </div>
         </div>
     </section>
@@ -46,13 +46,13 @@
                         <p class="font-label-caps text-on-surface-variant/60">COLLEGE FRIEND</p>
                     </div>
                 </div>
-                <p class="font-body-lg text-on-surface-variant leading-relaxed mb-4 italic">"Amara, looking back at our photos from Paris, I'm reminded of how your laughter could light up even the rainiest streets."</p>
-                <div class="font-label-caps text-secondary text-xs">MARCH 12, 2024</div>
+                <p class="font-body-lg text-on-surface-variant leading-relaxed mb-4 italic">""Devita, looking back at our photos, I'm reminded of how your laughter could light up even the rainiest streets."</p>
+                <div class="font-label-caps text-secondary text-xs">JULY 26, 2026</div>
             </div>
             
             <!-- Kartu Ucapan 2 -->
             <div class="md:col-span-5 bg-surface-container-low p-8 rounded-xl flex flex-col justify-center relative overflow-hidden">
-                <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">"To many more years of late-night coffee, deep conversations, and being there for each other."</p>
+                <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">"To many more years of deep conversations, and being there for each other."</p>
                 <div class="mt-auto"><p class="font-headline-lg text-primary italic text-xl">Julian S.</p></div>
             </div>
         </div>
@@ -80,4 +80,3 @@
 
 </div>
 
-<?php include 'footer.php'; ?>

@@ -1,97 +1,154 @@
-<?php
-include 'config.php';
-include 'header.php';
+<?php include 'header.php'; ?>
 
- $data = mysqli_query(
-    $conn,
-    "SELECT * FROM memories ORDER BY id DESC"
-);
-?>
-
-<!-- ================= GALLERY SECTION ================= -->
-
-<section class="relative pt-24 pb-12 px-5 md:px-16 overflow-hidden">
-
-    <!-- Floating Heart -->
-    <div class="floating-heart top-24 left-10 text-5xl">❤</div>
-    <div class="floating-heart bottom-20 right-10 text-4xl" style="animation-delay: 2s;">❤</div>
-
-    <!-- Title -->
-    <div class="text-center mb-16 relative z-10">
-        <span class="font-label-caps text-secondary tracking-widest block mb-4">OUR PRECIOUS MEMORIES</span>
-        <h2 class="text-5xl md:text-6xl italic text-primary font-display-md mb-4">
-            The Gallery
-        </h2>
-        <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed font-body-lg">
-            Every photo holds a memory,<br>
-            every memory holds a piece of us.
-        </p>
+<div class="px-5 md:px-16 py-16 max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+        <h1 class="font-display-lg text-primary mb-4 italic" style="font-family: 'Playfair Display';">The Gallery</h1>
+        <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto italic">Every photo holds a memory, every memory holds a piece of us.</p>
     </div>
 
-    <!-- Gallery Grid -->
-    <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 relative z-10">
-
-        <?php while($row = mysqli_fetch_assoc($data)) : ?>
-
-        <div class="break-inside-avoid group relative overflow-hidden rounded-3xl shadow-xl cursor-pointer"
-             onclick="openLightbox('uploads/<?php echo $row['image']; ?>')">
-
-            <img
-                src="uploads/<?php echo $row['image']; ?>"
-                alt="<?php echo $row['title']; ?>"
-                class="w-full object-cover transition duration-700 group-hover:scale-110"
-                loading="lazy">
-
-            <!-- Overlay -->
-            <div class="absolute inset-0
-                        bg-gradient-to-t
-                        from-black/70
-                        via-black/10
-                        to-transparent
-                        opacity-0
-                        group-hover:opacity-100
-                        transition duration-500">
+    <div class="masonry-grid">
+        <!-- Foto 1 (Ditampilkan langsung) -->
+        <div class="masonry-item group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/foto1.jpeg" alt="Memory 1">
+            <div class="p-4">
+                <span class="font-label-caps text-secondary text-xs block">SEASON 2026</span>
+                <p class="font-body-md italic text-on-surface-variant">Afternoon light.</p>
             </div>
-
-            <!-- Text -->
-            <div class="absolute bottom-0 left-0 p-6
-                        translate-y-10
-                        group-hover:translate-y-0
-                        transition duration-500">
-
-                <span class="text-pink-200 text-sm tracking-widest font-label-caps">
-                    MEMORY
-                </span>
-
-                <h3 class="text-white text-2xl italic font-display-md">
-                    <?php echo $row['title']; ?>
-                </h3>
-
-                <?php if (!empty($row['description'])) : ?>
-                <p class="text-gray-200 text-sm mt-2 font-body-md">
-                    <?php echo $row['description']; ?>
-                </p>
-                <?php endif; ?>
-
+        </div>
+        <div class="masonry-item group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/6.jpeg" alt="Memory 1">
+            <div class="p-4">
+                <span class="font-label-caps text-secondary text-xs block">SUMMER 2026</span>
+                <p class="font-body-md italic text-on-surface-variant">Bali with your beauty.</p>
             </div>
         </div>
 
-        <?php endwhile; ?>
+        <!-- Foto 2 (Ditampilkan langsung) -->
+        <div class="masonry-item group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/foto2.jpeg" alt="Memory 2">
+            <div class="p-4">
+                <span class="font-label-caps text-secondary text-xs block">YOUR GOOD GUY </span>
+                <p class="font-body-md italic text-on-surface-variant">Before the world woke up.</p>
+            </div>
+        </div>
+    
+        <!-- Foto 3 (DITAMBAHKAN CLASS hidden-card) -->
+        <div class="masonry-item hidden-card group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/kelas.jpeg" alt="Memory 3">
+            <div class="p-4">
+                <span class="font-label-caps text-secondary text-xs block">VERY SWEET</span>
+                <p class="font-body-md italic text-on-surface-variant">enthusiasm for college.</p>
+            </div>
+        </div>
 
+        <!-- Foto 4 (DITAMBAHKAN CLASS hidden-card) -->
+        <div class="masonry-item hidden-card group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/pap.jpeg" alt="Memory 4">
+            <div class="p-4">
+                <span class="font-label-caps text-secondary text-xs block">PURE JOY</span>
+                <p class="font-body-md italic text-on-surface-variant">first pap of you.</p>
+            </div>
+        </div>
+
+        <!-- Foto 5 (DITAMBAHKAN CLASS hidden-card) -->
+        <div class="masonry-item hidden-card group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/5.jpeg" alt="Memory 5">
+            <div class="p-4">
+                <span class="font-label-caps text-secondary text-xs block">GALLERY NIGHT</span>
+                <p class="font-body-md italic text-on-surface-variant">Every moment becomes an art piece.</p>
+            </div>
+        </div>
     </div>
-
-    <!-- Empty State (jika tidak ada foto dari database) -->
-    <?php if (mysqli_num_rows($data) === 0) : ?>
-    <div class="text-center py-20">
-        <span class="material-symbols-outlined text-outline-variant/40 text-6xl">photo_library</span>
-        <p class="font-display-md text-gray-400 mt-4 text-xl">Belum Ada Foto</p>
-        <p class="text-gray-300 text-sm mt-2 font-body-md">Login dan mulai tambahkan kenangan berharga.</p>
-        <button onclick="openLoginModal()" class="mt-4 px-6 py-2 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary/90 transition">
-            Masuk untuk Upload
+    
+    <!-- Tombol View More / Show Less -->
+    <div class="text-center mt-12">
+        <button id="viewMoreBtn" class="gallery-btn">
+            View More
         </button>
     </div>
-    <?php endif; ?>
+</div>
 
-</section>
+<!-- Style Khusus Gallery (Ditaruh di bawah agar tidak mengganggu file lain) -->
+<style>
+    /* 1. Class untuk menyembunyikan card */
+    .hidden-card {
+        display: none;
+    }
 
-<?php include 'footer.php'; ?>
+    /* 2. Animasi saat card muncul */
+    .show-card {
+        animation: fadeSlideIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* 3. Style Tombol (Disesuaikan dengan tema Eternal Memory) */
+    .gallery-btn {
+        background: #fadadd; /* Warna primary-container pink lembut */
+        color: #765e61; /* Warna on-primary-container */
+        border: 2px solid transparent;
+        padding: 12px 35px;
+        border-radius: 9999px; /* Rounded full */
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 0.05em;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(250, 218, 221, 0.4); /* Efek glow pink */
+        cursor: pointer;
+    }
+
+    .gallery-btn:hover {
+        background: transparent;
+        color: #70585b; /* Warna primary */
+        border-color: #70585b;
+    }
+</style>
+
+<!-- Script Logika Show More / Show Less -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Mengambil tombol berdasarkan ID
+        const viewMoreBtn = document.getElementById("viewMoreBtn");
+        
+        // Mengambil seluruh card yang memiliki class 'hidden-card'
+        const hiddenCards = document.querySelectorAll(".hidden-card");
+        
+        // Status tombol (false = sedang tertutup, true = sedang terbuka)
+        let isExpanded = false;
+
+        // Menjalankan kode ketika tombol diklik
+        viewMoreBtn.addEventListener("click", function() {
+            if (!isExpanded) {
+                // Tampilkan card yang tersembunyi
+                hiddenCards.forEach(card => {
+                    card.style.display = "block"; // Tampilkan
+                    card.classList.add("show-card"); // Tambah animasi
+                });
+                
+                // Ganti teks tombol
+                viewMoreBtn.innerText = "Show Less";
+                isExpanded = true;
+                
+            } else {
+                // Sembunyikan kembali card
+                hiddenCards.forEach(card => {
+                    card.style.display = "none"; // Sembunyikan
+                    card.classList.remove("show-card"); // Hapus animasi
+                });
+                
+                // Kembalikan teks tombol
+                viewMoreBtn.innerText = "View More";
+                isExpanded = false;
+            }
+        });
+    });
+</script>

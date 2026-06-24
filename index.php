@@ -1,18 +1,12 @@
 <?php include 'header.php'; ?>
 
-<!-- 1. AUDIO TAG (PINDAHKAN KE PALING ATAS) -->
-<!-- Harus di atas script agar browser bisa menemukannya -->
-
-
-<!-- 2. HALAMAN HOME -->
+<!-- HALAMAN HOME -->
 <div class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <!-- Pastikan folder namanya 'image' (tanpa s) -->
         <img class="w-full h-full object-cover filter blur-[3px] brightness-90" src="image/foto1.jpeg"/>
         <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
     </div>
     
-    <!-- Floating Hearts -->
     <div class="absolute inset-0 z-1 pointer-events-none opacity-40">
         <span class="material-symbols-outlined floating-heart text-3xl" style="top: 20%; left: 10%;">favorite</span>
         <span class="material-symbols-outlined floating-heart text-2xl" style="top: 70%; left: 85%;">favorite</span>
@@ -25,6 +19,8 @@
             <span class="material-symbols-outlined">auto_awesome</span> Open Memories
         </a>
     </div>
-
-
+</div>
+<?php include 'gallery.php'; ?>
+<?php include 'wishes.php'; ?>
+<?php include 'timeline.php'; ?>
 <?php include 'footer.php'; ?>
