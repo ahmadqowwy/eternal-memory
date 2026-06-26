@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Eternal Memory</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "primary": "#70585b",
+                    "secondary": "#735c00",
+                    "surface": "#fbf9f5",
+                    "on-surface": "#1b1c1a",
+                    "primary-container": "#fadadd",
+                    "on-primary-container": "#765e61",
+                    "outline-variant": "#d2c3c4",
+                    "surface-container-low": "#f3f0eb"
+                },
+                "spacing": {
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "section-gap": "120px"
+                },
+                "fontFamily": {
+                    "headline-lg": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "display-md": ["Playfair Display"],
+                    "body-md": ["Inter"]
+                }
+            }
+        }
+    }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .glass-panel {
+            background: rgba(251, 249, 245, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .organic-glow {
+            box-shadow: 0 20px 50px rgba(250, 218, 221, 0.4);
+        }
+
+        .floating-heart {
+            position: absolute;
+            pointer-events: none;
+            color: #fadadd;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 24px;
+        }
+        @media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 24px; }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(250, 218, 221, 0.5);
+        }
+
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, #ffe088 15%, #ffe088 85%, transparent);
+        }
+
+        .hidden-card { display: none; }
+
+        .show-card {
+            animation: fadeSlideIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery-btn {
+            background: #fadadd;
+            color: #765e61;
+            border: 2px solid transparent;
+            padding: 12px 35px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(250, 218, 221, 0.4);
+            cursor: pointer;
+        }
+        .gallery-btn:hover {
+            background: transparent;
+            color: #70585b;
+            border-color: #70585b;
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Nav active link */
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #735c00;
+            transition: width 0.3s ease;
+        }
+        .nav-link.active {
+            color: #70585b;
+            font-weight: 700;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Mobile nav */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .mobile-menu.open {
+            max-height: 300px;
+        }
+
+        /* Heart burst on CTA click */
+        .heart-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 24px;
+            animation: burstUp 1.2s ease-out forwards;
+        }
+        @keyframes burstUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-120px) scale(0.3) rotate(20deg); }
+        }
+
+        /* Subtle parallax on hero */
+        .hero-bg {
+            will-change: transform;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 200;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+
+    <!-- ==================== TOAST ==================== -->
+    <div id="toast" class="toast glass-panel px-6 py-3 rounded-full shadow-lg border border-white/40">
+        <p class="text-primary font-body-md text-sm" id="toast-msg">Welcome!</p>
+    </div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm">
+        <div class="flex justify-between items-center px-5 md:px-16 py-4">
+            <a href="#home" class="font-headline-lg text-primary italic text-xl hover:opacity-80 transition">
+                Eternal Memory
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link active text-on-surface-variant/70 hover:text-primary transition-all" data-section="home">Our Story</a>
+                <a href="#gallery" class="nav-link text-on-surface-variant/70 hover:text-primary transition-all" data-section="gallery">The Gallery</a>
+                <a href="#wishes" class="nav-link text-on-surface-variant/70 hover:text-primary transition-all" data-section="wishes">Wishes</a>
+                <a href="#timeline" class="nav-link text-on-surface-variant/70 hover:text-primary transition-all" data-section="timeline">Timeline</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-primary cursor-default">favorite</span>
+                <span class="material-symbols-outlined text-primary cursor-default">auto_stories</span>
+                <!-- Hamburger for mobile -->
+                <button id="hamburger" class="md:hidden text-primary focus:outline-none" aria-label="Menu">
+                    <span class="material-symbols-outlined" id="hamburger-icon">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-surface/95 backdrop-blur-xl border-t border-outline-variant/10 px-5">
+            <div class="flex flex-col gap-1 py-4">
+                <a href="#home" class="nav-link-mobile block py-3 px-4 rounded-lg text-on-surface-variant/70 hover:text-primary hover:bg-primary-container/30 transition-all" data-section="home">Our Story</a>
+                <a href="#gallery" class="nav-link-mobile block py-3 px-4 rounded-lg text-on-surface-variant/70 hover:text-primary hover:bg-primary-container/30 transition-all" data-section="gallery">The Gallery</a>
+                <a href="#wishes" class="nav-link-mobile block py-3 px-4 rounded-lg text-on-surface-variant/70 hover:text-primary hover:bg-primary-container/30 transition-all" data-section="wishes">Wishes</a>
+                <a href="#timeline" class="nav-link-mobile block py-3 px-4 rounded-lg text-on-surface-variant/70 hover:text-primary hover:bg-primary-container/30 transition-all" data-section="timeline">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main>
+
+        <!-- ===== SECTION: HOME / HERO ===== -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0 hero-bg" id="hero-bg">
+                <img class="w-full h-full object-cover filter blur-[3px] brightness-90" src="image/foto1.jpeg" alt="Hero background"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Floating Hearts -->
+            <div class="absolute inset-0 z-[1] pointer-events-none opacity-40">
+                <span class="material-symbols-outlined floating-heart text-3xl" style="top: 20%; left: 10%; animation-delay: 0s;">favorite</span>
+                <span class="material-symbols-outlined floating-heart text-2xl" style="top: 70%; left: 85%; animation-delay: 1.5s;">favorite</span>
+                <span class="material-symbols-outlined floating-heart text-xl" style="top: 40%; left: 75%; animation-delay: 3s;">favorite</span>
+                <span class="material-symbols-outlined floating-heart text-4xl" style="top: 60%; left: 15%; animation-delay: 2s;">favorite</span>
+                <span class="material-symbols-outlined floating-heart text-2xl" style="top: 15%; left: 55%; animation-delay: 4s;">favorite</span>
+            </div>
+
+            <div class="relative z-10 text-center px-6 max-w-3xl">
+                <p class="font-label-caps text-secondary tracking-[0.3em] mb-6 text-sm reveal">A CELEBRATION OF LOVE</p>
+                <h1 class="font-display-lg text-primary mb-6 drop-shadow-md reveal" style="font-family: 'Playfair Display'; font-size: clamp(2.5rem, 7vw, 3.5rem); line-height: 1.1;">
+                    Happy Birthday,<br>My Love &#10084;&#65039;
+                </h1>
+                <p class="font-body-lg text-on-surface-variant mb-10 text-lg reveal" style="transition-delay: 0.15s;">
+                    To the woman who fills every moment of my life with light and grace.
+                </p>
+                <a href="#gallery" id="cta-btn" class="inline-block px-10 py-4 bg-primary-container text-primary rounded-full font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto reveal" style="transition-delay: 0.3s;">
+                    <span class="material-symbols-outlined">auto_awesome</span> Open Memories
+                </a>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+                <span class="material-symbols-outlined text-primary/40 text-3xl">expand_more</span>
+            </div>
+        </section>
+
+        <!-- ===== SECTION: GALLERY ===== -->
+        <section id="gallery" class="px-5 md:px-16 py-16 max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="font-label-caps text-secondary tracking-widest block mb-4 text-sm">CAPTURED MOMENTS</span>
+                <h1 class="font-display-lg text-primary mb-4 italic" style="font-family: 'Playfair Display'; font-size: clamp(2rem, 5vw, 3rem);">The Gallery</h1>
+                <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto italic">Every photo holds a memory, every memory holds a piece of us.</p>
+            </div>
+
+            <div class="masonry-grid">
+                <!-- Foto 1 -->
+                <div class="masonry-item group rounded-xl overflow-hidden glass-card hover-lift shadow-md reveal">
+                    <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/foto1.jpeg" alt="Memory 1" loading="lazy"/>
+                    <div class="p-4">
+                        <span class="font-label-caps text-secondary text-xs block">SEASON 2026</span>
+                        <p class="font-body-md italic text-on-surface-variant">Afternoon light.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="masonry-item group rounded-xl overflow-hidden glass-card hover-lift shadow-md reveal" style="transition-delay: 0.1s;">
+                    <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/6.jpeg" alt="Memory 2" loading="lazy"/>
+                    <div class="p-4">
+                        <span class="font-label-caps text-secondary text-xs block">SUMMER 2026</span>
+                        <p class="font-body-md italic text-on-surface-variant">Bali with your beauty.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 3 -->
+                <div class="masonry-item group rounded-xl overflow-hidden glass-card hover-lift shadow-md reveal" style="transition-delay: 0.2s;">
+                    <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/foto2.jpeg" alt="Memory 3" loading="lazy"/>
+                    <div class="p-4">
+                        <span class="font-label-caps text-secondary text-xs block">YOUR GOOD GUY</span>
+                        <p class="font-body-md italic text-on-surface-variant">Before the world woke up.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 4 (Hidden) -->
+                <div class="masonry-item hidden-card group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+                    <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/kelas.jpeg" alt="Memory 4" loading="lazy"/>
+                    <div class="p-4">
+                        <span class="font-label-caps text-secondary text-xs block">VERY SWEET</span>
+                        <p class="font-body-md italic text-on-surface-variant">Enthusiasm for college.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 5 (Hidden) -->
+                <div class="masonry-item hidden-card group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+                    <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/pap.jpeg" alt="Memory 5" loading="lazy"/>
+                    <div class="p-4">
+                        <span class="font-label-caps text-secondary text-xs block">PURE JOY</span>
+                        <p class="font-body-md italic text-on-surface-variant">First pap of you.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 6 (Hidden) -->
+                <div class="masonry-item hidden-card group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
+                    <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/123.jpeg" alt="Memory 6" loading="lazy"/>
+                    <div class="p-4">
+                        <span class="font-label-caps text-secondary text-xs block">Your JAMESS????</span>
+                        <p class="font-body-md italic text-on-surface-variant">This Your BOYS.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 reveal">
+                <button id="viewMoreBtn" class="gallery-btn">View More</button>
+            </div>
+        </section>
+
+        <!-- ===== SECTION: WISHES ===== -->
+        <section id="wishes" class="max-w-5xl mx-auto px-5 md:px-16 pt-8 pb-16">
+            <!-- Hero Wishes -->
+            <div class="pt-10 pb-16 reveal">
+                <div class="relative w-full max-w-4xl mx-auto aspect-[16/9] md:aspect-[21/9] flex items-center justify-center p-8 rounded-xl overflow-hidden organic-glow">
+                    <div class="absolute inset-0 z-0">
+                        <img class="w-full h-full object-cover brightness-90 contrast-75" 
+                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbFTtV4j1MIWuJHgDY62nZL4TA_ouA6cLnxqqTrxm7mdMgX1mHCnjoDknhAwjJVWohogpZi1qQRwZIqg-QrH095POv0byId-zXtykqKL4DHj3NDc05eg_go0P8UFopXVV7cIX26B1DN_qN4RDV1dgNu5wP-G5ouqaVgja5Vr5ePAtRYVQbCJnI3G-MQgSeBwYENNqSGS4FVSFOcnjJ33M7KfQ26NTY3O76IM5YIF4eE5MvXMIPr7MAEiSUviNzz0QC8-9fe3scsTE" 
+                             alt="Wishes background"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent"></div>
+                    </div>
+                    <div class="relative z-10 text-center glass-panel p-10 rounded-xl border border-white/40 max-w-2xl">
+                        <span class="font-label-caps text-secondary mb-4 block tracking-widest text-sm">A SPECIAL MILESTONE</span>
+                        <h1 class="font-display-md text-primary mb-6 leading-tight" style="font-family: 'Playfair Display'; font-size: clamp(2rem, 5vw, 3rem);">
+                            Happy Birthday, <span class="italic">Devita</span>.
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wish Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
+                <!-- Card 1 -->
+                <div class="md:col-span-7 glass-panel p-8 rounded-xl border border-primary-container/20 organic-glow reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm" 
+                             src="image/112.jpeg" alt="James Chao"/>
+                        <div>
+                            <p class="font-headline-lg text-primary italic">James Chao</p>
+                            <p class="font-label-caps text-on-surface-variant/60 text-xs">COLLEGE FRIEND</p>
+                        </div>
+                    </div>
+                    <p class="font-body-lg text-on-surface-variant leading-relaxed mb-4 italic">"Devita, whenever I look back at our photos, I'm reminded of how your laughter could brighten even the rainiest days."</p>
+                    <div class="font-label-caps text-secondary text-xs">JULY 27, 2026</div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="md:col-span-5 bg-surface-container-low p-8 rounded-xl flex flex-col justify-center relative overflow-hidden reveal" style="transition-delay: 0.15s;">
+                    <div class="absolute top-4 right-4 text-primary-container/30">
+                        <span class="material-symbols-outlined" style="font-size: 80px; font-variation-settings: 'FILL' 1;">format_quote</span>
+                    </div>
+                    <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed relative z-10">"Here's to many more years of laughter, heartfelt conversations, and always being there for each other."</p>
+                    <div class="mt-auto relative z-10">
+                        <p class="font-headline-lg text-primary italic text-xl">James Chao.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION: TIMELINE ===== -->
+        <section id="timeline" class="max-w-5xl mx-auto px-5 md:px-16 py-16">
+            <div class="mb-16 text-center reveal">
+                <span class="font-label-caps text-secondary tracking-widest block mb-4 text-sm">OUR JOURNEY TOGETHER</span>
+                <h1 class="font-display-md text-primary mb-8" style="font-family: 'Playfair Display'; font-size: clamp(2rem, 5vw, 3rem);">
+                    Every moment is a <br/><span class="italic font-normal">cherished chapter.</span>
+                </h1>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full timeline-line z-0 hidden md:block"></div>
+
+                <!-- EVENT 1: First Meet -->
+                <div class="relative z-10 mb-20 flex flex-col md:flex-row items-center justify-between gap-12 reveal">
+                    <!-- Text Left -->
+                    <div class="w-full md:w-[45%] order-2 md:order-1 text-left">
+                        <span class="font-label-caps text-secondary block mb-2 text-xs">SEPTEMBER 14, 2020</span>
+                        <h2 class="font-display-md text-primary mb-6" style="font-family: 'Playfair Display'; font-size: clamp(1.5rem, 3vw, 2rem);">First Meet</h2>
+                        <p class="font-body-lg text-on-surface-variant mb-8 leading-relaxed">I forgot exactly when we first met, but every time I saw you, my heart always beat so fast. Since then, I kept hoping to meet you again. Every Saturday after school at MIN, I even chose the longer way home just so I could pass by your house and see you, even for a moment.</p>
+                        <div class="font-headline-lg italic text-secondary border-b border-secondary w-max">— The beginning of us.</div>
+                    </div>
+
+                    <!-- Center Dot -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary-container border-2 border-secondary rounded-full z-20 hidden md:block"></div>
+
+                    <!-- Image Right -->
+                    <div class="w-full md:w-[45%] order-1 md:order-2">
+                        <div class="organic-glow rounded-xl overflow-hidden group">
+                            <img class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105" 
+                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZGjv-RGGYWYNIjiFLVhTl8DzZwUKTNmRBIlX8tXOtMOJrTK64DYoU3RlL1ay5wlhYlLyC2wkxCwXv2Ijo9x4YS13mqZHWejl23_KcnD4vjQbxqRgjRHk5DJiN3xv-82ctMRTXOft53e4LYrGSSE4fIqdA5sUIwDGVQ3-irqGIaB6kFBnymieVMzNdrzDq2g8EwDaoWLrX81BGs2aDqYkVgZHBHuVOiDrzlDqzduNYm3ulOG0nBVvGDYl0o9633A15XvUDDhncJiE" 
+                                 alt="First Meet" loading="lazy"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EVENT 2: First Date -->
+                <div class="relative z-10 mb-20 flex flex-col md:flex-row items-center justify-between gap-12 reveal">
+                    <!-- Text Right -->
+                    <div class="w-full md:w-[45%] text-right order-1">
+                        <span class="font-label-caps text-secondary block mb-2 text-xs">Maret 26, 2026</span>
+                        <h2 class="font-display-md text-primary mb-6" style="font-family: 'Playfair Display'; font-size: clamp(1.5rem, 3vw, 2rem);">Our First Date</h2>
+                        <p class="font-body-lg text-on-surface-variant mb-8 leading-relaxed">"Meeting you again was one of the happiest moments in my life. I'm grateful that we found our way back to each other, started talking again, and even got to share our first date together. Every moment with you has become a beautiful memory that I will always treasure.</p>
+                        <p class="font-body-lg text-on-surface-variant mb-8 leading-relaxed">I hope our relationship continues to grow stronger, no matter what challenges we may face. As you work hard in college, I hope you stay consistent, keep believing in yourself, and never give up on your dreams. I know that one day all your efforts will lead you to the success you deserve.</p>
+                        <p class="font-body-lg text-on-surface-variant mb-8 leading-relaxed">Happy Birthday, Devita. Thank you for coming into my life once again. I love you more than words can say. &#10084;&#65039;"</p>
+                        <div class="font-headline-lg italic text-secondary border-b border-secondary w-max ml-auto">— A night of magic.</div>
+                    </div>
+
+                    <!-- Center Dot -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary-container border-2 border-secondary rounded-full z-20 hidden md:block"></div>
+
+                    <!-- Image Left -->
+                    <div class="w-full md:w-[45%] order-2">
+                        <div class="organic-glow rounded-xl overflow-hidden group">
+                            <img class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105" 
+                                 src="image/5.jpeg" alt="First Date" loading="lazy"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-outline-variant/20 py-12 px-5 md:px-16">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <p class="font-headline-lg text-primary italic text-lg">Eternal Memory</p>
+                <p class="font-body-md text-on-surface-variant/60 text-sm mt-1">Made with &#10084;&#65039; for Devita</p>
+            </div>
+            <div class="flex items-center gap-2 text-on-surface-variant/40">
+                <span class="material-symbols-outlined text-lg">favorite</span>
+                <span class="font-body-md text-sm">Forever &amp; Always</span>
+                <span class="material-symbols-outlined text-lg">favorite</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== AUDIO PLAYER ==================== -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/love.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="fixed bottom-6 right-6 z-[100] transition-all duration-300" id="music-player">
+        <div class="glass-card p-3 rounded-full flex items-center gap-3 shadow-xl border border-white/50 px-5">
+            <!-- Equalizer animation -->
+            <div id="eq-bars" class="flex items-end gap-[2px] h-4 w-4 opacity-0 transition-opacity duration-300">
+                <span class="w-[3px] bg-secondary rounded-full" style="height: 6px; animation: eqBar 0.4s ease infinite alternate;"></span>
+                <span class="w-[3px] bg-secondary rounded-full" style="height: 12px; animation: eqBar 0.5s ease infinite alternate 0.1s;"></span>
+                <span class="w-[3px] bg-secondary rounded-full" style="height: 8px; animation: eqBar 0.35s ease infinite alternate 0.2s;"></span>
+            </div>
+            <span class="font-bold text-primary text-sm hidden md:block">Now Playing</span>
+            <button id="music-btn" class="text-primary hover:text-secondary transition-colors focus:outline-none p-1 rounded-full hover:bg-white/20" aria-label="Toggle music">
+                <span id="music-icon" class="material-symbols-outlined">play_arrow</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Equalizer keyframes (injected here to keep style block clean) -->
+    <style>
+        @keyframes eqBar {
+            from { height: 4px; }
+            to { height: 16px; }
+        }
+    </style>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ===== MUSIC PLAYER =====
+        const audio = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        const eqBars = document.getElementById('eq-bars');
+        let isPlaying = false;
+
+        function updateIcon() {
+            if (isPlaying) {
+                musicIcon.innerText = 'pause';
+                musicBtn.classList.remove('text-primary');
+                musicBtn.classList.add('text-secondary');
+                eqBars.style.opacity = '1';
+            } else {
+                musicIcon.innerText = 'play_arrow';
+                musicBtn.classList.remove('text-secondary');
+                musicBtn.classList.add('text-primary');
+                eqBars.style.opacity = '0';
+            }
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play().then(function() {
+                    isPlaying = true;
+                    updateIcon();
+                    showToast('Music is playing');
+                }).catch(function() {
+                    isPlaying = false;
+                    showToast('Click again to play music');
+                });
+                return;
+            }
+            updateIcon();
+        }
+
+        musicBtn.addEventListener('click', toggleMusic);
+
+        // Auto-play attempt
+        document.addEventListener('DOMContentLoaded', function() {
+            updateIcon();
+            audio.play().then(function() {
+                isPlaying = true;
+                updateIcon();
+            }).catch(function() {
+                // Browser blocked autoplay, user needs to click
+            });
+        });
+
+
+        // ===== GALLERY VIEW MORE / LESS =====
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        const hiddenCards = document.querySelectorAll('.hidden-card');
+        let isExpanded = false;
+
+        viewMoreBtn.addEventListener('click', function() {
+            if (!isExpanded) {
+                hiddenCards.forEach(function(card, i) {
+                    card.style.display = 'block';
+                    card.style.animationDelay = (i * 0.15) + 's';
+                    card.classList.add('show-card');
+                });
+                viewMoreBtn.innerText = 'Show Less';
+                isExpanded = true;
+            } else {
+                hiddenCards.forEach(function(card) {
+                    card.style.display = 'none';
+                    card.classList.remove('show-card');
+                });
+                viewMoreBtn.innerText = 'View More';
+                isExpanded = false;
+            }
+        });
+
+
+        // ===== SCROLL REVEAL =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        revealElements.forEach(function(el) {
+            revealObserver.observe(el);
+        });
+
+
+        // ===== ACTIVE NAV ON SCROLL =====
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link[data-section]');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(function(section) {
+                const top = section.offsetTop - 150;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(function(link) {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        updateActiveNav();
+
+
+        // ===== MOBILE HAMBURGER =====
+        const hamburger = document.getElementById('hamburger');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburger.addEventListener('click', function() {
+            mobileMenu.classList.toggle('open');
+            if (mobileMenu.classList.contains('open')) {
+                hamburgerIcon.innerText = 'close';
+            } else {
+                hamburgerIcon.innerText = 'menu';
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-link-mobile').forEach(function(link) {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+                hamburgerIcon.innerText = 'menu';
+            });
+        });
+
+
+        // ===== HEART BURST ON CTA CLICK =====
+        const ctaBtn = document.getElementById('cta-btn');
+        ctaBtn.addEventListener('click', function(e) {
+            for (let i = 0; i < 6; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'material-symbols-outlined heart-burst';
+                heart.innerText = 'favorite';
+                heart.style.color = ['#fadadd', '#f8bbd0', '#f48fb1', '#70585b', '#ffe088', '#ffcc80'][i];
+                heart.style.left = (e.clientX + (Math.random() - 0.5) * 80) + 'px';
+                heart.style.top = (e.clientY + (Math.random() - 0.5) * 40) + 'px';
+                heart.style.animationDelay = (i * 0.08) + 's';
+                document.body.appendChild(heart);
+                setTimeout(function() { heart.remove(); }, 1400);
+            }
+        });
+
+
+        // ===== SUBTLE PARALLAX ON HERO =====
+        const heroBg = document.getElementById('hero-bg');
+        window.addEventListener('scroll', function() {
+            if (heroBg) {
+                const scrolled = window.scrollY;
+                heroBg.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
+            }
+        }, { passive: true });
+
+
+        // ===== TOAST NOTIFICATION =====
+        const toastEl = document.getElementById('toast');
+        const toastMsg = document.getElementById('toast-msg');
+        let toastTimeout;
+
+        function showToast(msg) {
+            toastMsg.innerText = msg;
+            toastEl.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(function() {
+                toastEl.classList.remove('show');
+            }, 2500);
+        }
+
+
+        // ===== NAVBAR SHADOW ON SCROLL =====
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 20) {
+                nav.style.boxShadow = '0 4px 20px rgba(112, 88, 91, 0.08)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        }, { passive: true });
+
+    })();
+    </script>
+
+</body>
+</html>
