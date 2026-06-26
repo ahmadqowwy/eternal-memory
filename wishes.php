@@ -58,25 +58,7 @@
         </div>
     </section>
 
-    <!-- Form Kirim Ucapan -->
-    <section class="py-12 max-w-2xl mx-auto mb-20">
-        <div class="glass-panel p-10 rounded-xl border border-white/60 organic-glow text-center">
-            <h3 class="font-display-md text-primary mb-6" style="font-family: 'Playfair Display'; font-size: 32px;">Leave a Wish</h3>
-            <form action="" method="POST" class="space-y-6 text-left">
-                <div>
-                    <label class="font-label-caps text-on-surface-variant/60 block mb-2">YOUR NAME</label>
-                    <input type="text" class="w-full bg-transparent border-0 border-b border-secondary/30 py-3 px-0 focus:ring-0 focus:border-primary transition-all font-body-md" placeholder="Nama Kamu">
-                </div>
-                <div>
-                    <label class="font-label-caps text-on-surface-variant/60 block mb-2">YOUR MESSAGE</label>
-                    <textarea rows="4" class="w-full bg-transparent border-0 border-b border-secondary/30 py-3 px-0 focus:ring-0 focus:border-primary transition-all font-body-md resize-none" placeholder="Tulis ucapan manis..."></textarea>
-                </div>
-                <div class="pt-4 text-center">
-                    <button type="submit" class="w-full bg-primary text-white py-4 rounded-full font-label-caps tracking-widest hover:brightness-110 transition-all shadow-lg active:scale-95">SEND BLESSING</button>
-                </div>
-            </form>
-        </div>
-    </section>
+ 
 
 </div>
 

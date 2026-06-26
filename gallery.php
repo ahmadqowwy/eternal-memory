@@ -52,10 +52,10 @@
 
         <!-- Foto 5 (DITAMBAHKAN CLASS hidden-card) -->
         <div class="masonry-item hidden-card group rounded-xl overflow-hidden glass-card hover-lift shadow-md">
-            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/5.jpeg" alt="Memory 5">
+            <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="image/foto4.jpeg" alt="Memory 5">
             <div class="p-4">
-                <span class="font-label-caps text-secondary text-xs block">GALLERY NIGHT</span>
-                <p class="font-body-md italic text-on-surface-variant">Every moment becomes an art piece.</p>
+                <span class="font-label-caps text-secondary text-xs block">Your JAMESS????</span>
+                <p class="font-body-md italic text-on-surface-variant">This YOur BOYS.</p>
             </div>
         </div>
     </div>
