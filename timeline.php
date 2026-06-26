@@ -51,7 +51,11 @@
             <div class="w-full md:w-[45%] text-right order-1">
                 <span class="font-label-caps text-secondary block mb-2">OCTOBER 02, 2020</span>
                 <h2 class="font-display-md text-primary mb-6" style="font-family: 'Playfair Display'; font-size: 32px;">Our First Date</h2>
-                <p class="font-body-lg text-on-surface-variant mb-8 leading-relaxed">I forgot exactly when we first met, but every time I saw you, my heart always beat so fast. Since then, I kept hoping to meet you again. Every Saturday after school at MIN, I even chose the longer way home just so I could pass by your house and see you, even for a momen.</p>
+                <p class="font-body-lg text-on-surface-variant mb-8 leading-relaxed">"Meeting you again was one of the happiest moments in my life. I'm grateful that we found our way back to each other, started talking again, and even got to share our first date together. Every moment with you has become a beautiful memory that I will always treasure.
+
+I hope our relationship continues to grow stronger, no matter what challenges we may face. As you work hard in college, I hope you stay consistent, keep believing in yourself, and never give up on your dreams. I know that one day all your efforts will lead you to the success you deserve.
+
+Happy Birthday, Devita. Thank you for coming into my life once again. I love you more than words can say. ❤️"</p>
                 <div class="font-headline-lg italic text-secondary border-b border-secondary w-max ml-auto">— A night of magic.</div>
             </div>
 

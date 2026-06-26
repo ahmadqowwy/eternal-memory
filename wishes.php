@@ -38,22 +38,22 @@
             <div class="md:col-span-7 glass-panel p-8 rounded-xl border border-primary-container/20 organic-glow">
                 <div class="flex items-center gap-4 mb-6">
                     <!-- GAMBAR AVATAR PENGGUNA 1: Ganti SRC di bawah -->
-                    <img class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm" 
-                         src="image/foto2.jpeg" 
+                    <img class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm" 
+                         src="image/112.jpeg" 
                          alt="Elena">
                     <div>
-                        <p class="font-headline-lg text-primary italic">Elena Vance</p>
+                        <p class="font-headline-lg text-primary italic">James Chao </p>
                         <p class="font-label-caps text-on-surface-variant/60">COLLEGE FRIEND</p>
                     </div>
                 </div>
-                <p class="font-body-lg text-on-surface-variant leading-relaxed mb-4 italic">""Devita, looking back at our photos, I'm reminded of how your laughter could light up even the rainiest streets."</p>
-                <div class="font-label-caps text-secondary text-xs">JULY 26, 2026</div>
+                <p class="font-body-lg text-on-surface-variant leading-relaxed mb-4 italic">"Devita, whenever I look back at our photos, I'm reminded of how your laughter could brighten even the rainiest days."</p>
+                <div class="font-label-caps text-secondary text-xs">JULY 27, 2026</div>
             </div>
             
             <!-- Kartu Ucapan 2 -->
             <div class="md:col-span-5 bg-surface-container-low p-8 rounded-xl flex flex-col justify-center relative overflow-hidden">
-                <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">"To many more years of deep conversations, and being there for each other."</p>
-                <div class="mt-auto"><p class="font-headline-lg text-primary italic text-xl">Julian S.</p></div>
+                <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">"Here's to many more years of laughter, heartfelt conversations, and always being there for each other."</p>
+                <div class="mt-auto"><p class="font-headline-lg text-primary italic text-xl">James Chao.</p></div>
             </div>
         </div>
     </section>
